@@ -16,8 +16,7 @@ class TrainingSession extends Model
      */
     protected $fillable = [
         'session_name',
-        'created_by',
-        'date_created',
+        'created_by'
     ];
 
     /**

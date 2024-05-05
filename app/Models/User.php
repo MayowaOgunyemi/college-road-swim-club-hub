@@ -25,8 +25,7 @@ class User extends Authenticatable
         'user_status_id',
         'gender',
         'dob',
-        'pic',
-        'date_created',
+        'pic'
     ];
 
     /**
@@ -48,7 +47,7 @@ class User extends Authenticatable
         return [
             'dob' => 'date',
             'password' => 'hashed',
-            'gender' => Gender::class, // Cast 'gender' attribute to the Gender enum
+            'gender' => Gender::class // Cast 'gender' attribute to the Gender enum
         ];
     }
 
