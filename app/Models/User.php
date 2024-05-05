@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Enums\Gender;
 
 class User extends Authenticatable
 {
@@ -17,9 +18,15 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
+        'role_id',
+        'user_status_id',
+        'gender',
+        'dob',
+        'pic',
+        'date_created',
     ];
 
     /**
@@ -28,8 +35,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password'
     ];
 
     /**
@@ -40,8 +46,25 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
+            'dob' => 'date',
             'password' => 'hashed',
+            'gender' => Gender::class, // Cast 'gender' attribute to the Gender enum
         ];
+    }
+
+     /**
+     * Get the role associated with the user.
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Get the status associated with the user.
+     */
+    public function status()
+    {
+        return $this->belongsTo(UserStatus::class, 'user_status_id');
     }
 }
