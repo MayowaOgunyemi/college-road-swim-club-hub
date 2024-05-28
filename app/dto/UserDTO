@@ -1,0 +1,33 @@
+<?php
+
+namespace App\DTO;
+
+use Carbon\Carbon;
+use Spatie\DataTransferObject\DataTransferObject;
+use App\Models\User; // Import the User model
+
+class UserDTO extends DataTransferObject
+{
+    public int $id;
+    public string $username;
+    public string $email;
+    public int $role_id;
+    public int $user_status_id;
+    public ?string $gender;
+    public Carbon $dob;
+    public ?string $pic;
+
+    public static function fromModel(User $user): self
+    {
+        return new self([
+            'id' => $user->id,
+            'username' => $user->username,
+            'email' => $user->email,
+            'role_id' => $user->role_id,
+            'user_status_id' => $user->user_status_id,
+            'gender' => $user->gender,
+            'dob' => $user->dob,
+            'pic' => $user->pic,
+        ]);
+    }
+}
